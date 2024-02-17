@@ -106,7 +106,8 @@ const fetchFunction = async () => {
     return data;
 }
 
-store.dispatch(getUserAccount(1))
+// store.dispatch(getUserAccount(1))
+console.log(store.getState())
 
 
 

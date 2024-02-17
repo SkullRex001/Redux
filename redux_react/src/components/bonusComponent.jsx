@@ -1,15 +1,16 @@
 import React from 'react'
 import './compo.css'
+import { incrementBonus } from '../actions/actionName'
 
-const BonusComponent = ({bonus , setBonus}) => {
-    function incBonus() {
-        setBonus(bonus + 1)
-    }
+const BonusComponent = ({store}) => {
+ 
   return (
     <div className='compoDiv'>
         <p>Bonus Component</p>
-        <h3>Total points : {bonus}</h3>
-        <button onClick={incBonus}>Increment</button>
+        <h3>Total points : {store.getState().bonusReducer.bonus}</h3>
+        <button onClick={()=>{
+            return store.dispatch(incrementBonus())
+        }}>Increment</button>
     </div>
   )
 }
