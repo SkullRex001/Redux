@@ -1,4 +1,4 @@
-import { getAccUserFulFilled , getAccountRejected , getAccUserPending , increase , decrease , increaseByAmount} from "../actions/actionName";
+import { getAccUserFulFilled , getAccUserRejected , getAccUserPending , increase , decrease , increaseByAmount} from "../actions/actionName";
 
 
 //Account Reducer
@@ -6,7 +6,7 @@ export function accountReducer(state = { amount: 0 }, action) {
     switch (action.type) {
         case getAccUserFulFilled:
             return { amount: action.payload, pending: false };
-        case getAccountRejected:
+        case getAccUserRejected:
             return { ...state, error: action.error, pending: false }
         case getAccUserPending:
             return { ...state, pending: true }

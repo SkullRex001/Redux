@@ -1,33 +1,40 @@
 import React from 'react'
 import './compo.css'
+import { useDispatch, useSelector } from 'react-redux'
+import { increment, decrement, incrementByAmount, getUserAccount } from '../actions/actionName'
 
-const AmountComponent = ({amount , setAmount , incBy , setInBy}) => {
-    function increment() {
-        setAmount({amount : amount.amount + 1})
-    }
-    function decrement() {
-        setAmount({amount : amount.amount - 1})
-    }
-    function  incByValue(value) {
-        setAmount({amount : amount.amount + parseInt(value)})
+const AmountComponent = ({ incBy, setInBy }) => {
 
-    }
-  return (
-    <div className='compoDiv'>
-        <p>Account Component</p>
-        <h3>Amount : ${amount.amount}</h3>
-        <div>
-            <button onClick={increment}>Increment</button>
-            <button onClick={decrement}>Decrement</button>
-            <input type="number" onChange={(e)=>{ setInBy(e.target.value)
+    const amount = useSelector(state => state.accountReducer.amount)
+    const dispatch = useDispatch()
+    return (
+        <div className='compoDiv'>
+            <p>Account Component</p>
+            <h3>Amount : ${amount}</h3>
+            <div>
+                <button onClick={() => {
+                    return dispatch(increment())
+                }}>Increment</button>
+                <button onClick={() => {
 
-            }}/>
-            <button onClick={()=>{
-                incByValue(incBy)
-            }} >Increment By {incBy}</button>
+                    return dispatch(decrement())
+
+                }}>Decrement</button>
+                <input type="number" onChange={(e) => {
+                    setInBy(e.target.value)
+                }} />
+                <button onClick={() => {
+                    return dispatch(incrementByAmount(incBy))
+
+                }} >Increment By {incBy}</button>
+
+                <button onClick={() => {
+                    return dispatch(getUserAccount(1))
+
+                }} >Get User Account</button>
+            </div>
         </div>
-    </div>
-  )
+    )
 }
 
 export default AmountComponent

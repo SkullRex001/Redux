@@ -1,15 +1,18 @@
 import React from 'react'
 import './compo.css'
 import { incrementBonus } from '../actions/actionName'
+import { useDispatch, useSelector } from 'react-redux'
 
-const BonusComponent = ({store}) => {
+const BonusComponent = () => {
+    const bonus = useSelector(state=> state.bonusReducer.bonus)
+    const dispatch = useDispatch()
  
   return (
     <div className='compoDiv'>
         <p>Bonus Component</p>
-        <h3>Total points : {store.getState().bonusReducer.bonus}</h3>
+        <h3>Total points : {bonus}</h3>
         <button onClick={()=>{
-            return store.dispatch(incrementBonus())
+            return dispatch(incrementBonus())
         }}>Increment</button>
     </div>
   )

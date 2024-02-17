@@ -5,13 +5,17 @@ export const increaseByAmount = 'account/increaseByAmount'
 export const getAccUserPending = 'account/getUser/pending'
 export const getAccUserFulFilled = 'account/getUser'
 export const incBonus = 'bonus/increment'
+export const getAccUserRejected = 'account/getUser/rejected'
+
 
 //ACTION CREATORS
 export function getUserAccount(id) {
     return async (dispatch, getState) => {
         try {
             dispatch(getAccountUserPending())
-            const data = fetchFunction();
+            const response = await fetch(`http://localhost:8080/account/${id}`)
+            const data = await response.json()
+         
             dispatch(getAccountUserFulFilled(data.amount))
 
         }
@@ -32,7 +36,7 @@ export function getAccountUserFulFilled(value) {
 }
 
 export function getAccountRejected(error) {
-    return { type: getAccountRejected, error: error }
+    return { type: getAccUserRejected, error: error }
 }
 
 export function increment() {
@@ -47,3 +51,5 @@ export function incrementByAmount(value) {
 export function incrementBonus() {
     return { type: incBonus };
 }
+
+
